@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -9,6 +10,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private Transform itemSpot;
+
+    private Animator animator;
 
     private Interactable targetInteractable;
     private Vector3 targetPos;
@@ -23,6 +26,7 @@ public class Player : MonoBehaviour
             return;
         }
         Instance = this;
+        animator = GetComponent<Animator>();
         targetPos = transform.position;
     }
 
@@ -45,6 +49,7 @@ public class Player : MonoBehaviour
         {
             targetInteractable.Interact();
             targetInteractable = null;
+            animator.Play("HerrBrandIdle");
         }
     }
 
@@ -52,6 +57,7 @@ public class Player : MonoBehaviour
     {
         targetInteractable = _interactable;
         targetPos = _interactable.interactSpot.position;
+        animator.Play("HerrBrandWalk");
     }
 
     public void MoveTo(Vector3 _pos)
