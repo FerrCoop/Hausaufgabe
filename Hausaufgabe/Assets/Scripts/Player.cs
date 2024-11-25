@@ -10,9 +10,15 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private Transform itemSpot;
+    [Space]
+    [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] private LayerMask floorLayer;
 
+    private Camera cam;
     private Animator animator;
+    private UIManager uiManager;
 
+    private Vector2 mousePrevious;
     private Interactable targetInteractable;
     private Vector3 targetPos;
 
@@ -26,7 +32,9 @@ public class Player : MonoBehaviour
             return;
         }
         Instance = this;
+        cam = Camera.main;
         animator = GetComponent<Animator>();
+        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         targetPos = transform.position;
     }
 
@@ -40,6 +48,44 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        Physics2D.queriesStartInColliders = false;
+        Vector2 _mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D[] _hits = Physics2D.RaycastAll(mousePrevious, (_mousePos - mousePrevious).normalized, Vector2.Distance(_mousePos, mousePrevious), interactableLayer);
+        RaycastHit2D[] _hits2 = Physics2D.RaycastAll(_mousePos, (mousePrevious - _mousePos).normalized, Vector2.Distance(_mousePos, mousePrevious), interactableLayer);
+        List<RaycastHit2D> _hits3 = new List<RaycastHit2D>();
+        _hits3.AddRange(_hits);
+        _hits3.AddRange(_hits2);
+        foreach (RaycastHit2D _hit in _hits3)
+        {
+            if (_hit.collider.TryGetComponent(out Interactable _interactable))
+            {
+                _interactable.ToggleHighlight();
+            }
+        }
+
+        mousePrevious = _mousePos;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Collider2D _col = Physics2D.OverlapPoint(_mousePos, interactableLayer);
+            if (_col != null)
+            {
+                MoveTo(_col.GetComponent<Interactable>());
+            }
+            else 
+            {
+                if (Physics2D.OverlapCircle(_mousePos, 0.1f, floorLayer) != null)
+                { Debug.Log("Clicked on floor"); }
+                    
+                MoveTo(_mousePos);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            uiManager.IncrementDisplay(1);
+        }
+
         if (transform.position != targetPos)
         {
             float _distance = Vector3.Distance(transform.position, targetPos);

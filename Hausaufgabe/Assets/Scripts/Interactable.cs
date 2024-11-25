@@ -14,23 +14,12 @@ public abstract class Interactable : MonoBehaviour
         myRenderer = GetComponent<SpriteRenderer>();
         myRenderer.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100) + Mathf.RoundToInt(-transform.position.x);
         highlightRenderer.enabled = false;
-        highlightRenderer.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100) + Mathf.RoundToInt(-transform.position.x) + 1;
+        highlightRenderer.sortingOrder = myRenderer.sortingOrder + 1;
     }
 
-    private void OnMouseEnter()
+    public void ToggleHighlight()
     {
-        highlightRenderer.enabled = true;
-    }
-
-    private void OnMouseExit()
-    {
-        highlightRenderer.enabled = false;
-    }
-
-    private void OnMouseDown()
-    {
-        Debug.Log("Clicked");
-        Player.Instance.MoveTo(this);
+        highlightRenderer.enabled = !highlightRenderer.enabled;
     }
 
     public abstract void Interact();
