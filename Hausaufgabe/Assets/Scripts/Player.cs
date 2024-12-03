@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private Camera cam;
     private Animator animator;
     private UIManager uiManager;
+    private SpriteRenderer spriteRenderer;
 
     private Vector2 mousePrevious;
     private Interactable targetInteractable;
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
         cam = Camera.main;
         animator = GetComponent<Animator>();
         uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         targetPos = transform.position;
     }
 
@@ -75,9 +77,9 @@ public class Player : MonoBehaviour
             else 
             {
                 if (Physics2D.OverlapCircle(_mousePos, 0.1f, floorLayer) != null)
-                { Debug.Log("Clicked on floor"); }
-                    
-                MoveTo(_mousePos);
+                {
+                    MoveTo(_mousePos);
+                }               
             }
         }
 
@@ -90,6 +92,7 @@ public class Player : MonoBehaviour
         {
             float _distance = Vector3.Distance(transform.position, targetPos);
             transform.position = Vector3.Lerp(transform.position, targetPos, Mathf.Clamp(speed * Time.deltaTime / _distance, 0f, 1f));
+            spriteRenderer.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100) + Mathf.RoundToInt(-transform.position.x);
         } 
         else if (targetInteractable != null)
         {

@@ -41,6 +41,9 @@ TagManager:
   - name: Background
     uniqueID: 4274736613
     locked: 0
+  - name: Wall Hangings
+    uniqueID: 3902614153
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

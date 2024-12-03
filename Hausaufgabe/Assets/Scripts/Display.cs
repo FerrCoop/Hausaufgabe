@@ -5,6 +5,7 @@ using UnityEngine;
 public class Display : Interactable
 {
     [SerializeField] private string[] dialogue;
+    [SerializeField] private Color color;
     [SerializeField] private Sprite background;
 
     private int interactIndex = 0;
@@ -19,6 +20,6 @@ public class Display : Interactable
     public override void Interact()
     {
         interactIndex = 0;
-        uiManager.DisplayText(dialogue, background);
+        uiManager.DisplayText(dialogue, color, background);
     }
 }
