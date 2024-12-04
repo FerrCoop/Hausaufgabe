@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
-    public Item CurrentItem { get; private set; }
+    public Item CurrentItem { get; set; }
 
     [SerializeField] private float speed;
     [SerializeField] private Transform itemSpot;
@@ -120,6 +120,7 @@ public class Player : MonoBehaviour
     {  
         if (_item == null)
         {
+            _item = null;
             //drop current item
             //update animation
         }

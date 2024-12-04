@@ -130,7 +130,7 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d7e7901c27ee0964ea8dc2966698f690, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6c56fbb7f0cd2594eacf60b1058e8d6c, type: 3}
   m_MaskAlphaCutoff: 0.2
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
@@ -175,8 +175,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.6}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.3333334, y: 1.3333334}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -200,7 +200,8 @@ MonoBehaviour:
   interactSpot: {fileID: 2498125076762738130}
   highlightRenderer: {fileID: 4811646296562181520}
   dialogue: []
-  background: {fileID: 21300000, guid: 16fad83d9ad8e734cbd3e0b2c53616d9, type: 3}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  background: {fileID: 21300000, guid: cdefce9e38e72f54aaaf6745ae30b5ab, type: 3}
 --- !u!1 &3998310697793545206
 GameObject:
   m_ObjectHideFlags: 0

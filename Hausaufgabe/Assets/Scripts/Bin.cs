@@ -23,7 +23,8 @@ public class Bin : Interactable
             Refuse _refuse = (Refuse)_currentItem;
             if (_refuse.binType == this.binType)
             {
-                Debug.Log("Correct!");
+                Destroy(_currentItem.gameObject);
+                Player.Instance.SetCurrentItem(null);
             }
             else
             {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Display : Interactable
 {
-    [SerializeField] private string[] dialogue;
+    [SerializeField] [TextArea] private string[] dialogue;
     [SerializeField] private Color color;
     [SerializeField] private Sprite background;
 
