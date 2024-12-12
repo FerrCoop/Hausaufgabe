@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -34,7 +33,6 @@ public class Player : MonoBehaviour
         }
         Instance = this;
         cam = Camera.main;
-        animator = GetComponent<Animator>();
         uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         targetPos = transform.position;
@@ -98,7 +96,6 @@ public class Player : MonoBehaviour
         {
             targetInteractable.Interact();
             targetInteractable = null;
-            animator.Play("HerrBrandIdle");
         }
     }
 
@@ -106,7 +103,6 @@ public class Player : MonoBehaviour
     {
         targetInteractable = _interactable;
         targetPos = _interactable.interactSpot.position;
-        animator.Play("HerrBrandWalk");
     }
 
     public void MoveTo(Vector3 _pos)
